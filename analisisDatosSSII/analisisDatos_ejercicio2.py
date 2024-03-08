@@ -71,13 +71,10 @@ def ejercicio2():
     print()
     query_users_filter = "SELECT * FROM user_data_online WHERE username IS NOT 'None' AND tel_num IS NOT 'None' AND hash_password IS NOT 'None' AND pass_complexity IS NOT 'None' AND province IS NOT 'None' AND permisos IS NOT 'None' AND emails_total IS NOT 'None' AND emails_phishing IS NOT 'None' AND emails_clicados IS NOT 'None';"
     query_ips_filter = "SELECT * FROM users_ips_fechas WHERE username_access IN (SELECT username FROM user_data_online WHERE username IS NOT 'None' AND tel_num IS NOT 'None' AND hash_password IS NOT 'None' AND pass_complexity IS NOT 'None' AND province IS NOT 'None' AND permisos IS NOT 'None' AND emails_total IS NOT 'None' AND emails_phishing IS NOT 'None' AND emails_clicados IS NOT 'None');"
-    query_webs = "SELECT * FROM legal_data_online;"
+
 
     df_users = pd.read_sql_query(query_users_filter, conn)
     df_fechas = pd.read_sql_query(query_ips_filter, conn)
-    #df_legal = pd.read_sql_query(query_webs, conn)
-
-
 
     # con los valores filtrados
 
