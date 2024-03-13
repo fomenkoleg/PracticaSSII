@@ -2,14 +2,19 @@ import pandas as pd
 import sqlite3
 
 def ejercicio3():
+
+    # Conectamos con la base de datos
     conn = sqlite3.connect('users_data_online.db')
 
+    # Hacemos las consultas para obtener los ususarios con permiso 0 o 1 respectivamente
     query_permisos_0 = "SELECT * FROM user_data_online WHERE permisos=0"
     query_permisos_1 = "SELECT * FROM user_data_online WHERE permisos=1"
 
+    # Y se crean los correspondientes DataFrames
     df_p0 = pd.read_sql_query(query_permisos_0, conn)
     df_p1 = pd.read_sql_query(query_permisos_1, conn)
 
+    # Lo mismo para las contraseñas seguras e inseguras
     query_pass_sec = "SELECT * FROM user_data_online WHERE pass_complexity=true"
     query_pass_noSec = "SELECT * FROM user_data_online WHERE pass_complexity=false"
 
