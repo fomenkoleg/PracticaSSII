@@ -7,7 +7,6 @@ import hashlib as hash
 def if_secure(password, hashes):
     for h in hashes:
         if password == h:
-            #print("CONTRASEÑA NO SEGURA ENCONTRADA! La contraseña es: " + password)
             return 0
     return 1
 
