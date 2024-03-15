@@ -30,6 +30,7 @@ def ejercicio2():
 
     # pregunta 2
     print("Media de fechas por usuario:")
+    # agrupamos las fechas por usuarios y se calcula la cantidad media por usuario
     print(df_fechas.groupby('username_access').count().mean()['fecha'])
     print("Desviación estándar de fechas por usuario:")
     print(df_fechas.groupby('username_access').count().std()['fecha'])
@@ -37,6 +38,7 @@ def ejercicio2():
 
     # pregunta 3
     print("Media de IPs por usuario:")
+    # hacemos lo mismo que en la pregunta 2 pero con las IPs
     print(df_fechas.groupby('username_access').count().mean()['ip_address'])
     print("Desviación estándar de IPs por usuario:")
     print(df_fechas.groupby('username_access').count().std()['ip_address'])
@@ -80,6 +82,8 @@ def ejercicio2():
     df_fechas = pd.read_sql_query(query_ips_filter, conn)
 
     # CON LOS VALORES FILTRADOS
+
+    # repetimos todo el proceso
 
     # pregunta 1
     print("Numero de muestras de usuarios después del filtrado: ")

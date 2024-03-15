@@ -20,7 +20,6 @@ def crear_tabla_users():
         # Para hashearlas usamos md5
         hash_pass = hash.md5(palabra[:-1].encode(encoding="utf-8")).hexdigest()
         hashes.append(hash_pass)
-    #print(hashes)
 
     # Abrimos la conexión con la base de datos
     conn_users = sqlite3.connect('users_data_online.db')
@@ -110,8 +109,7 @@ def crear_tabla_users():
             """)
             conn_users.commit()
 
-    #test = cursor_user.execute("SELECT pass_complexity FROM user_data_online;")
-    #print(test.fetchall())
+
     conn_users.close()
 
 def crear_tabla_legal():
@@ -164,5 +162,7 @@ def crear_tabla_legal():
     conn_users.close()
 
 
-crear_tabla_users()
-crear_tabla_legal()
+
+if __name__ == '__main__':
+    crear_tabla_users()
+    crear_tabla_legal()

@@ -138,8 +138,8 @@ def ejercicio4_4():
     plt.tight_layout()
     plt.show()
 
-
-ejercicio4_1()
-ejercicio4_2()
-ejercicio4_3()
-ejercicio4_4()
+if __name__ == '__main__':
+    ejercicio4_1()
+    ejercicio4_2()
+    ejercicio4_3()
+    ejercicio4_4()
