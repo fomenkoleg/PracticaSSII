@@ -4,7 +4,7 @@ import pandas as pd
 
 
 def ejercicio4_1():
-
+    answer = ''
     # Conectamos con la base de datos
     conn = sqlite3.connect('users_data_online.db')
 
@@ -29,13 +29,13 @@ def ejercicio4_1():
     df_ips_admin['diferencia'] = pd.to_numeric(df_ips_admin.groupby('username_access')['fecha'].diff().dt.days)
 
     # Mostramos los valores obtenidos
-    print("La media de tiempo medio entre cambios de contraseña por usuario normal (en días): ")
+    answer+=("La media de tiempo medio entre cambios de contraseña por usuario normal (en días): ")+'\n\n'
     medias_ips_normal = df_ips_normal.groupby('username_access')['diferencia'].mean()
-    print(medias_ips_normal)
+    answer+=(medias_ips_normal.to_string())+'\n\n'
 
-    print("La media de tiempo medio entre cambios de contraseña por usuario administrador (en días): ")
+    answer+=("La media de tiempo medio entre cambios de contraseña por usuario administrador (en días): ")+'\n\n'
     medias_ips_admin = df_ips_admin.groupby('username_access')['diferencia'].mean()
-    print(medias_ips_admin)
+    answer+=(medias_ips_admin.to_string())+'\n\n'
 
     # Crear una gráfica de barras para comparar los tiempos medios entre los cambios de contraseña
     plt.figure(figsize=(25, 16))
@@ -48,12 +48,15 @@ def ejercicio4_1():
     plt.title('Tiempo medio trascurrido en días ara usuarios admin')
     medias_ips_admin.plot(kind='bar', x='username_access', y='Tiempo medio trascurrido', color='magenta')
 
-    plt.show()
+    plt.savefig("static/images/grafico1.png")
+
+    #plt.show()
+    return answer
 
 def ejercicio4_2():
 
     conn = sqlite3.connect('users_data_online.db')
-
+    answer = ''
     # Hacer consultas de usuarios con contraseñas inseguras y crear DataFrame
     query_inseguros = 'SELECT username, emails_clicados, emails_phishing FROM user_data_online WHERE pass_complexity IS 0 AND emails_clicados IS NOT "None" AND emails_phishing IS NOT "None";'
     df_inseguros = pd.read_sql_query(query_inseguros, conn)
@@ -64,12 +67,12 @@ def ejercicio4_2():
 
     # Quitar columnas que no se mostrarán en la gráfica
     df_inseguros.drop(['emails_clicados', 'emails_phishing'], axis=1, inplace=True)
-    print(df_inseguros)
+    answer += (df_inseguros.to_string())+'\n'
 
     # Limitar DataFrame a los primeros 10 usuarios
     df_inseguros = df_inseguros.head(10)
 
-    print(df_inseguros)
+    answer+=(df_inseguros.to_string())+'\n'
 
     # Crear gráfico de barras correspondiente
     df_inseguros.plot(kind='bar', x='username', color='aqua')
@@ -78,13 +81,14 @@ def ejercicio4_2():
     plt.ylabel("Probabilidad de éxito")
     plt.legend()
     plt.tight_layout()
-    plt.show()
-
+    plt.savefig("static/images/grafico2.png")
+    #plt.show()
+    return answer
 
 def ejercicio4_3():
 
     conn = sqlite3.connect('users_data_online.db')
-
+    answer=''
     # Realizar consultas para obtener datos de la tabla de legal
     query_webs = 'SELECT web, cookies, aviso, proteccion FROM legal_data_online;'
     df_webs = pd.read_sql_query(query_webs, conn)
@@ -94,7 +98,7 @@ def ejercicio4_3():
 
     # Para que en la gráfica aparezca con el nombre del sitio web
     df_webs = df_webs.set_index('web')
-    print(df_webs)
+    answer+=(df_webs.to_string())+'\n'
 
     # Ordenar las webs según el número de políticas desactualizadas y quedarse con los 5 primeros
     df_webs.sort_values(by=['desactualizadas'], inplace=True, ascending=False)
@@ -108,13 +112,14 @@ def ejercicio4_3():
     plt.legend()
 
     plt.tight_layout()
-    plt.show()
-
+    plt.savefig("static/images/grafico3.png")
+    #plt.show()
+    return answer
 
 def ejercicio4_4():
 
     conn = sqlite3.connect('users_data_online.db')
-
+    answer = ''
     # Consulta para obtener los datos de la tabla de legal
     query_webs = 'SELECT web, creacion, cookies, aviso, proteccion FROM legal_data_online;'
     df_webs = pd.read_sql_query(query_webs, conn)
@@ -124,7 +129,7 @@ def ejercicio4_4():
 
     # Agrupar las webs sgún el año de creación y si satisfacen las políticas, contando el numero de webs de cada categoría
     df_webs_agrupado_dos_columnas= df_webs.groupby(['creacion', 'satisface']).size().unstack()
-    print(df_webs_agrupado_dos_columnas)
+    answer+=str(df_webs_agrupado_dos_columnas)+'\n'
 
     # Gráfico de barras correspondiente
     df_webs_agrupado_dos_columnas.plot(kind='bar')
@@ -133,7 +138,9 @@ def ejercicio4_4():
     plt.ylabel('Número de sitios web')
     plt.legend(['No se cumple', 'Se cumple'])
     plt.tight_layout()
-    plt.show()
+    plt.savefig("static/images/grafico4.png")
+    #plt.show()
+    return answer
 
 if __name__ == '__main__':
     ejercicio4_1()
