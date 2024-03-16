@@ -3,6 +3,7 @@ import sqlite3
 
 
 def ejercicio2():
+
     answer = ''
     # Conectamos con la base de datos
     conn = sqlite3.connect('users_data_online.db')

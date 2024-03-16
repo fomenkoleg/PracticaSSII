@@ -31,14 +31,10 @@ def ejercicio4_1():
     # Mostramos los valores obtenidos
     print("La media de tiempo medio entre cambios de contraseña por usuario normal (en días): ")
     medias_ips_normal = df_ips_normal.groupby('username_access')['diferencia'].mean()
-    medias_ips_normal['tiempo_medio'] = df_ips_normal['diferencia']
-    medias_ips_normal.drop(['diferencia'])
     print(medias_ips_normal)
 
     print("La media de tiempo medio entre cambios de contraseña por usuario administrador (en días): ")
     medias_ips_admin = df_ips_admin.groupby('username_access')['diferencia'].mean()
-    medias_ips_admin['tiempo_medio'] = df_ips_admin['diferencia']
-    medias_ips_admin.drop(['diferencia'])
     print(medias_ips_admin)
 
     # Crear una gráfica de barras para comparar los tiempos medios entre los cambios de contraseña
@@ -53,7 +49,6 @@ def ejercicio4_1():
     medias_ips_admin.plot(kind='bar', x='username_access', y='Tiempo medio trascurrido', color='magenta')
 
     plt.show()
-
 
 def ejercicio4_2():
 
@@ -74,8 +69,10 @@ def ejercicio4_2():
     # Limitar DataFrame a los primeros 10 usuarios
     df_inseguros = df_inseguros.head(10)
 
+    print(df_inseguros)
+
     # Crear gráfico de barras correspondiente
-    df_inseguros.plot(kind='bar', color='aqua')
+    df_inseguros.plot(kind='bar', x='username', color='aqua')
     plt.title("Probabilidad de éxito de ataque de phishing")
     plt.xlabel("Usuario")
     plt.ylabel("Probabilidad de éxito")
