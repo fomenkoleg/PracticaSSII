@@ -2,7 +2,7 @@ import pandas as pd
 import sqlite3
 
 def ejercicio3():
-
+    answer = ''
     # Conectamos con la base de datos
     conn = sqlite3.connect('users_data_online.db')
 
@@ -21,162 +21,162 @@ def ejercicio3():
     df_pwd_sec = pd.read_sql_query(query_pass_sec, conn)
     df_pwd_nosec = pd.read_sql_query(query_pass_noSec, conn)
 
-    print("PERMISOS DE USUARIO")
+    answer += ("PERMISOS DE USUARIO") + '\n'
 
     # pregunta 1
-    print("Numero de observaciones de emails phishing: ")
-    print(df_p0['emails_phishing'].count())
-    print()
+    answer += ("Numero de observaciones de emails phishing: ") + '\n'
+    answer += str(df_p0['emails_phishing'].count()) + '\n'
+    answer +=   '\n'
 
     # pregunta 2
-    print("Numero missings:")
+    answer += ("Numero missings:") + '\n'
     if df_p0['emails_phishing'].min() == 0:
-        print(df_p0['emails_phishing'].value_counts()[0])
+        answer += str(df_p0['emails_phishing'].value_counts()[0]) + '\n'
     else:
-        print("0")
-    print()
+        answer += ("0") + '\n'
+    answer +=  '\n'
 
     # pregunta 3
-    print("Mediana:")
-    print(df_p0['emails_phishing'].median())
-    print()
+    answer += ("Mediana:") + '\n'
+    answer += str(df_p0['emails_phishing'].median()) + '\n'
+    answer +=   '\n'
 
     # pregunta 4
-    print("Media:")
-    print(df_p0['emails_phishing'].mean())
-    print()
+    answer += ("Media:") + '\n'
+    answer += str(df_p0['emails_phishing'].mean()) + '\n'
+    answer +=  '\n'
 
     # pregunta 5
-    print("Varianza:")
-    print(df_p0['emails_phishing'].var())
-    print()
+    answer += ("Varianza:") + '\n'
+    answer += str(df_p0['emails_phishing'].var()) + '\n'
+    answer +=   '\n'
 
     # pregunta 6
-    print("Valor maximo:")
-    print(df_p0['emails_phishing'].max())
-    print()
-    print("Valor minimo:")
-    print(df_p0['emails_phishing'].min())
-    print()
+    answer += ("Valor maximo:") + '\n'
+    answer += str(df_p0['emails_phishing'].max()) + '\n'
+    answer +=  '\n'
+    answer += ("Valor minimo:") + '\n'
+    answer += str(df_p0['emails_phishing'].min()) + '\n'
+    answer +=   '\n'
 
-    print("########################################################################")
-    print()
-    print("PERMISOS DE ADMIN")
+    answer += ("########################################################################") + '\n'
+    answer +=  '\n'
+    answer += ("PERMISOS DE ADMIN") + '\n'
 
     # pregunta 1
-    print("Numero de observaciones de emails phishing: ")
-    print(df_p1['emails_phishing'].count())
-    print()
+    answer += ("Numero de observaciones de emails phishing: ") + '\n'
+    answer += str(df_p1['emails_phishing'].count()) + '\n'
+    answer +=   '\n'
 
     # pregunta 2
-    print("Numero missings:")
+    answer += ("Numero missings:") + '\n'
     if df_p1['emails_phishing'].min() == 0:
-        print(df_p1['emails_phishing'].value_counts()[0])
+        answer += str(df_p1['emails_phishing'].value_counts()[0]) + '\n'
     else:
-        print("0")
-    print()
+        answer += ("0") + '\n'
+    answer +=  '\n'
 
     # pregunta 3
-    print("Mediana:")
-    print(df_p1['emails_phishing'].median())
-    print()
+    answer += ("Mediana:") + '\n'
+    answer += str(df_p1['emails_phishing'].median()) + '\n'
+    answer +=  '\n'
 
     # pregunta 4
-    print("Media:")
-    print(df_p1['emails_phishing'].mean())
-    print()
+    answer += ("Media:") + '\n'
+    answer += str(df_p1['emails_phishing'].mean()) + '\n'
+    answer +=  '\n'
 
     # pregunta 5
-    print("Varianza:")
-    print(df_p1['emails_phishing'].var())
-    print()
+    answer += ("Varianza:") + '\n'
+    answer += str(df_p1['emails_phishing'].var()) + '\n'
+    answer +=  '\n'
 
     # pregunta 6
-    print("Valor maximo:")
-    print(df_p1['emails_phishing'].max())
-    print()
-    print("Valor minimo:")
-    print(df_p1['emails_phishing'].min())
-    print()
+    answer += ("Valor maximo:") + '\n'
+    answer += str(df_p1['emails_phishing'].max()) + '\n'
+    answer +=  '\n'
+    answer += ("Valor minimo:") + '\n'
+    answer +=str(df_p1['emails_phishing'].min()) + '\n'
+    answer +=   '\n'
 
-    print("########################################################################")
-    print()
-    print("CONTRASEÑA DEBIL")
+    answer += ("########################################################################") + '\n'
+    answer +=  '\n'
+    answer += ("CONTRASEÑA DEBIL") + '\n'
 
     # pregunta 1
-    print("Numero de observaciones de emails phishing: ")
-    print(df_pwd_nosec['emails_phishing'].count())
-    print()
+    answer += ("Numero de observaciones de emails phishing: ") + '\n'
+    answer += str(df_pwd_nosec['emails_phishing'].count()) + '\n'
+    answer +=  '\n'
 
     # pregunta 2
-    print("Numero missings:")
+    answer += ("Numero missings:") + '\n'
     if df_pwd_nosec['emails_phishing'].min() == 0:
-        print(df_pwd_nosec['emails_phishing'].value_counts()[0])
+        answer += str(df_pwd_nosec['emails_phishing'].value_counts()[0]) + '\n'
     else:
-        print("0")
-    print()
+        answer += ("0") + '\n'
+    answer += '\n'
 
     # pregunta 3
-    print("Mediana:")
-    print(df_pwd_nosec['emails_phishing'].median())
-    print()
+    answer += ("Mediana:") + '\n'
+    answer += str(df_pwd_nosec['emails_phishing'].median()) + '\n'
+    answer +=  '\n'
 
     # pregunta 4
-    print("Media:")
-    print(df_pwd_nosec['emails_phishing'].mean())
-    print()
+    answer += ("Media:") + '\n'
+    answer += str(df_pwd_nosec['emails_phishing'].mean()) + '\n'
+    answer +=  '\n'
 
     # pregunta 5
-    print("Varianza:")
-    print(df_pwd_nosec['emails_phishing'].var())
-    print()
+    answer += ("Varianza:") + '\n'
+    answer += str(df_pwd_nosec['emails_phishing'].var()) + '\n'
+    answer += '\n'
 
     # pregunta 6
-    print("Valor maximo:")
-    print(df_pwd_nosec['emails_phishing'].max())
-    print()
-    print("Valor minimo:")
-    print(df_pwd_nosec['emails_phishing'].min())
-    print()
+    answer += ("Valor maximo:") + '\n'
+    answer += str(df_pwd_nosec['emails_phishing'].max()) + '\n'
+    answer += '\n'
+    answer += ("Valor minimo:") + '\n'
+    answer += str(df_pwd_nosec['emails_phishing'].min()) + '\n'
+    answer +=  '\n'
 
-    print("########################################################################")
-    print()
-    print("CONTRASEÑA SEGURA")
+    answer += ("########################################################################") + '\n'
+    answer += '\n'
+    answer += ("CONTRASEÑA SEGURA") + '\n'
 
     # pregunta 1
-    print("Numero de observaciones de emails phishing: ")
-    print(df_pwd_sec['emails_phishing'].count())
-    print()
+    answer += ("Numero de observaciones de emails phishing: ") + '\n'
+    answer += str(df_pwd_sec['emails_phishing'].count()) + '\n'
+    answer += '\n'
 
     # pregunta 2
-    print("Numero missings:")
+    answer += ("Numero missings:") + '\n'
     if df_pwd_sec['emails_phishing'].min() == 0:
-        print(df_pwd_sec['emails_phishing'].value_counts()[0])
+        answer += str(df_pwd_sec['emails_phishing'].value_counts()[0]) + '\n'
     else:
-        print("0")
-    print()
+        answer += ("0") + '\n'
+    answer += '\n'
 
     # pregunta 3
-    print("Mediana:")
-    print(df_pwd_sec['emails_phishing'].median())
-    print()
+    answer += ("Mediana:") + '\n'
+    answer += str(df_pwd_sec['emails_phishing'].median()) + '\n'
+    answer += '\n'
 
     # pregunta 4
-    print("Media:")
-    print(df_pwd_sec['emails_phishing'].mean())
-    print()
+    answer += ("Media:") + '\n'
+    answer += str(df_pwd_sec['emails_phishing'].mean()) + '\n'
+    answer +=  '\n'
 
     # pregunta 5
-    print("Varianza:")
-    print(df_pwd_sec['emails_phishing'].var())
-    print()
+    answer += ("Varianza:") + '\n'
+    answer += str(df_pwd_sec['emails_phishing'].var()) + '\n'
+    answer += '\n'
 
     # pregunta 6
-    print("Valor maximo:")
-    print(df_pwd_sec['emails_phishing'].max())
-    print()
-    print("Valor minimo:")
-    print(df_pwd_sec['emails_phishing'].min())
+    answer += ("Valor maximo:") + '\n'
+    answer += str(df_pwd_sec['emails_phishing'].max()) + '\n'
+    answer += '\n'
+    answer += ("Valor minimo:") + '\n'
+    answer += str(df_pwd_sec['emails_phishing'].min()) + '\n'
 
-
+    return answer
 ejercicio3()
