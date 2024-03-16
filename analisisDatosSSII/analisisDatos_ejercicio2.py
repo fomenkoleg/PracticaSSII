@@ -24,9 +24,9 @@ def ejercicio2():
     print()
     print("###############################################################################")
     print()
-    print("Numero de muestras de usuarios después del filtrado: ")
+    print("Numero de muestras de usuarios antes del filtrado: ")
     print(df_users['username'].count())
-    print("Numero de muestras de fechas-ips después del filtrado: ")
+    print("Numero de muestras de fechas-ips antes del filtrado: ")
     print(df_fechas['id'].count())
     print()
 
