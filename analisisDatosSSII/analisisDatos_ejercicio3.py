@@ -34,12 +34,12 @@ def ejercicio3():
         answer += str(df_p0['emails_phishing'].value_counts()[0]) + '\n'
     else:
         answer += ("0") + '\n'
-    answer +=  '\n'
+    answer += '\n'
 
     # pregunta 3
     answer += ("Mediana:") + '\n'
     answer += str(df_p0['emails_phishing'].median()) + '\n'
-    answer +=   '\n'
+    answer += '\n'
 
     # pregunta 4
     answer += ("Media:") + '\n'

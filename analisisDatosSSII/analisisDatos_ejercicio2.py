@@ -54,7 +54,7 @@ def ejercicio2():
     print(df_users['emails_phishing'].mean())
     print()
 
-    answer += 'El valor mínimo de los emails recibidos en total: \n'+str(df_users['emails_total'].min())+'\nEl valor máximo de los emails recibidos en total: \n'+str(df_users['emails_total'].min())+'\nEl valor máximo de los emails recibidos en total: \n'+str(df_users['emails_total'].max())+'\n\n'
+    answer += 'El valor mínimo de los emails recibidos en total: \n'+str(df_users['emails_total'].min())+'\nEl valor máximo de los emails recibidos en total: \n'+str(df_users['emails_total'].max())+'\n\n'
     # pregunta 5
     print("El valor mínimo de los emails recibidos en total: ")
     print(df_users['emails_total'].min())
@@ -66,12 +66,10 @@ def ejercicio2():
     query_admin = "SELECT * FROM user_data_online WHERE permisos IS 1 ;"
     administradores = pd.read_sql_query(query_admin, conn)
 
-    print("Valor mínimo de emails de phishing clicados por usuario con permisos de administrador: ")
-    print(administradores['emails_clicados'].min())
-    print("Valor máximo de emails de phishing clicados por usuario con permisos de administrador: ")
-    print(administradores['emails_clicados'].max())
-    print()
-    print()
+    answer += ("Valor mínimo de emails de phishing clicados por usuario con permisos de administrador: " + '\n')
+    answer += str(administradores['emails_clicados'].min()) + '\n'
+    answer += ("Valor máximo de emails de phishing clicados por usuario con permisos de administrador: " + '\n')
+    answer += str(administradores['emails_clicados'].max()) + '\n'
 
 
     # Consultas + preprocessing
