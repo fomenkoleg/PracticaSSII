@@ -1,6 +1,6 @@
 import datetime
 from markupsafe import Markup
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import analisisDatos_ejercicio2
 import analisisDatos_ejercicio3
 import analisisDatos_ejercicio4
@@ -46,7 +46,6 @@ def ejercicio2():  # put application's code here
 def hello_world():
     return render_template('index.html')
 
-
 @app.route('/parte1')
 def parte1():
     return render_template('parte1.html')
@@ -55,6 +54,7 @@ def usuariosCriticos():
     palabras = analisisDatos_ejercicio4.ejercicio4_2()
     aux2 = palabras.replace("\n", "<br><br>")
     return aux2
+
 
 if __name__ == '__main__':
     app.run()
