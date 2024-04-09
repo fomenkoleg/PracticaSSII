@@ -44,8 +44,12 @@ def ejercicio2():  # put application's code here
 
 @app.route('/')
 def hello_world():
-    return render_template('parte1.html')
+    return render_template('index.html')
 
+
+@app.route('/parte1')
+def parte1():
+    return render_template('parte1.html')
 @app.route('/parte2')
 def usuariosCriticos():
     palabras = analisisDatos_ejercicio4.ejercicio4_2()
