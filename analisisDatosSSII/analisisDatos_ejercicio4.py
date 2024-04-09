@@ -1,6 +1,7 @@
 import sqlite3
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 
 def ejercicio4_1():
@@ -56,23 +57,22 @@ def ejercicio4_1():
 def ejercicio4_2():
 
     conn = sqlite3.connect('users_data_online.db')
-    answer = ''
     # Hacer consultas de usuarios con contraseñas inseguras y crear DataFrame
     query_inseguros = 'SELECT username, emails_clicados, emails_phishing FROM user_data_online WHERE pass_complexity IS 0 AND emails_clicados IS NOT "None" AND emails_phishing IS NOT "None";'
     df_inseguros = pd.read_sql_query(query_inseguros, conn)
 
     # Calcular probabilidad de éxito para ataques de phishing
     df_inseguros['probabilidad_phishing'] = (df_inseguros['emails_clicados']/df_inseguros['emails_phishing'])*100
+    df_inseguros.fillna(0, inplace=True)
     df_inseguros.sort_values(by=['probabilidad_phishing'])
 
     # Quitar columnas que no se mostrarán en la gráfica
     df_inseguros.drop(['emails_clicados', 'emails_phishing'], axis=1, inplace=True)
-    answer += (df_inseguros.to_string())+'\n'
+
 
     # Limitar DataFrame a los primeros 10 usuarios
-    df_inseguros = df_inseguros.head(10)
+    # df_inseguros = df_inseguros.head(10)
 
-    answer+=(df_inseguros.to_string())+'\n'
 
     # Crear gráfico de barras correspondiente
     df_inseguros.plot(kind='bar', x='username', color='aqua')
@@ -83,7 +83,7 @@ def ejercicio4_2():
     plt.tight_layout()
     plt.savefig("static/images/grafico2.png")
     #plt.show()
-    return answer
+    return df_inseguros
 
 def ejercicio4_3():
 
