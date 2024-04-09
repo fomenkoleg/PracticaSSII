@@ -51,9 +51,16 @@ def parte1():
     return render_template('parte1.html')
 @app.route('/parte2')
 def usuariosCriticos():
-    palabras = analisisDatos_ejercicio4.ejercicio4_2()
-    aux2 = palabras.replace("\n", "<br><br>")
-    return aux2
+    return render_template('parte2.html')
+
+@app.route('/parte2/usuariosCriticos')
+def userCritic():
+    return render_template('userCritic.html')
+
+@app.route('/parte2/usuariosCriticos/')
+def uCritic():
+    numberlines = request.args.get('numberline')
+    return "Has seleccionado el top " + numberlines
 
 
 if __name__ == '__main__':
