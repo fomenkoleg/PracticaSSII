@@ -60,7 +60,9 @@ def userCritic():
 @app.route('/parte2/usuariosCriticos/')
 def uCritic():
     numberlines = request.args.get('numberline')
-    return "Has seleccionado el top " + numberlines
+    aux = analisisDatos_ejercicio4.ejercicio4_2().head(int(numberlines))
+    show = aux.to_string().replace("\n", "<br>")
+    return show
 
 
 if __name__ == '__main__':
