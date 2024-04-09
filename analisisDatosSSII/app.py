@@ -7,7 +7,7 @@ import analisisDatos_ejercicio4
 
 app = Flask(__name__)
 
-@app.route("/ejercicio4")
+@app.route("/parte1/ejercicio4")
 def ejercicio4():
     palabras = analisisDatos_ejercicio4.ejercicio4_1()
     palabras2 = analisisDatos_ejercicio4.ejercicio4_2()
@@ -30,13 +30,13 @@ def ejercicio4():
     #palabras = palabras.replace("\r", "<br>")
     return render_template('ejercicio4.html', ejer1=text, ejer2=text2, ejer3=text3, ejer4=text4)
 
-@app.route('/ejercicio3')
+@app.route('/parte1/ejercicio3')
 def ejercicio3():  # put application's code here
     aux = analisisDatos_ejercicio3.ejercicio3()
     aux2 = aux.replace("\n", "<br>")
     return aux2
 
-@app.route('/ejercicio2')
+@app.route('/parte1/ejercicio2')
 def ejercicio2():  # put application's code here
     aux = analisisDatos_ejercicio2.ejercicio2()
     aux2 = aux.replace("\n", "<br>")
