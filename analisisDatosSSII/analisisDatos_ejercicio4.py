@@ -64,7 +64,7 @@ def ejercicio4_2():
     # Calcular probabilidad de éxito para ataques de phishing
     df_inseguros['probabilidad_phishing'] = (df_inseguros['emails_clicados']/df_inseguros['emails_phishing'])*100
     df_inseguros.fillna(0, inplace=True)
-    df_inseguros.sort_values(by=['probabilidad_phishing'])
+    df_inseguros.sort_values(by=['probabilidad_phishing'], inplace=True, ascending=False)
 
     # Quitar columnas que no se mostrarán en la gráfica
     df_inseguros.drop(['emails_clicados', 'emails_phishing'], axis=1, inplace=True)
@@ -83,7 +83,40 @@ def ejercicio4_2():
     plt.tight_layout()
     plt.savefig("static/images/grafico2.png")
     #plt.show()
-    return df_inseguros
+    return df_inseguros.head(10).to_string()
+
+def ejercicio_headnum(num):
+
+    conn = sqlite3.connect('users_data_online.db')
+    # Hacer consultas de usuarios con contraseñas inseguras y crear DataFrame
+    query_inseguros = 'SELECT username, emails_clicados, emails_phishing FROM user_data_online WHERE pass_complexity IS 0 AND emails_clicados IS NOT "None" AND emails_phishing IS NOT "None";'
+    df_inseguros = pd.read_sql_query(query_inseguros, conn)
+
+    # Calcular probabilidad de éxito para ataques de phishing
+    df_inseguros['probabilidad_phishing'] = (df_inseguros['emails_clicados']/df_inseguros['emails_phishing'])*100
+    df_inseguros.fillna(0, inplace=True)
+    df_inseguros.sort_values(by=['probabilidad_phishing'], inplace=True, ascending=False)
+
+    # Quitar columnas que no se mostrarán en la gráfica
+    df_inseguros.drop(['emails_clicados', 'emails_phishing'], axis=1, inplace=True)
+
+
+    # Limitar DataFrame a los primeros 10 usuarios
+    # df_inseguros = df_inseguros.head(10)
+
+
+    # Crear gráfico de barras correspondiente
+    df_inseguros.plot(kind='bar', x='username', color='aqua')
+    plt.title("Probabilidad de éxito de ataque de phishing")
+    plt.xlabel("Usuario")
+    plt.ylabel("Probabilidad de éxito")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig("static/images/grafico2.png")
+    #plt.show()
+    if num == -1:
+        return df_inseguros
+    return df_inseguros.head(num)
 
 def ejercicio4_3():
 
@@ -142,8 +175,18 @@ def ejercicio4_4():
     #plt.show()
     return answer
 
+def ejercicio_50percent(mitad):
+    df = ejercicio_headnum(-1)
+    if mitad == 1:
+        df = df[df['probabilidad_phishing'] <= 50]
+    elif mitad == 2:
+        df = df[df['probabilidad_phishing'] > 50]
+    return df
+
 if __name__ == '__main__':
     ejercicio4_1()
     ejercicio4_2()
     ejercicio4_3()
     ejercicio4_4()
+    ejercicio_50percent(2)
+    ejercicio_headnum(10)
