@@ -60,7 +60,10 @@ def userCritic():
 @app.route('/parte2/usuariosCriticos/')
 def uCritic():
     numberlines = request.args.get('numberline')
-    aux = analisisDatos_ejercicio4.ejercicio4_2().head(int(numberlines))
+    if(int(numberlines) < 0):
+        return "Entrada incorrecta"
+
+    aux = analisisDatos_ejercicio4.ejercicio_headnum(int(numberlines))
     show = aux.to_string().replace("\n", "<br>")
     return show
 
