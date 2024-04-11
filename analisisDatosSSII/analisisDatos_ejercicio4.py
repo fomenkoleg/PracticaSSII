@@ -102,9 +102,9 @@ def ejercicio_headnum(num):
     plt.legend()
     plt.tight_layout()
     plt.savefig("static/images/grafico2.png")
-    if num == -1 or num > df_inseguros.shape[0]:
+    if num > df_inseguros.shape[0]:
         return df_inseguros
-    elif num < -1:
+    elif num < -1 or num == 0:
         return None
     return df_inseguros.head(num)
 
