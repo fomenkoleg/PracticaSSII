@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 import analisisDatos_ejercicio2
 import analisisDatos_ejercicio3
 import analisisDatos_ejercicio4
+import ejercicio3_5
 
 app = Flask(__name__)
 
@@ -67,6 +68,10 @@ def uCritic():
     show = aux.to_string().replace("\n", "<br>")
     return show
 
+@app.route('/parte2/ultimasVulnerabilidades')
+def lastVulnerabilities():
+    aux = ejercicio3_5.prueba()
+    return aux
 
 if __name__ == '__main__':
     app.run()
