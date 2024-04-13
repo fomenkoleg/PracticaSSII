@@ -68,24 +68,27 @@ def uCritic():
     aux = analisisDatos_ejercicio4.ejercicio_headnum(int(numberlines))
     show = aux.to_string().replace("\n", "<br>")
     return show
+    #return render_template('userCritic.html', usuarios=show)
 
 @app.route('/parte2/webDesactualizadas')
-def websDesactualizadas():
-    return render_template('outdateWeb.html')
+def websOutdated():
+    return render_template('outdatedWeb.html')
 
 @app.route('/parte2/webDesactualizadas/')
-def wDesactualizadas():
+def wOutdated():
     numberlines = request.args.get('numberline')
     if(int(numberlines) < 0):
         return "Entrada incorrecta"
 
     aux = ejercicio1_2.top_webs(int(numberlines))
-    return aux
+    return render_template('outdatedWeb.html', desactualizadas=aux)
 
 @app.route('/parte2/ultimasVulnerabilidades')
 def lastVulnerabilities():
     aux = ejercicio3_5.prueba()
     return aux
+    #return render_template('lastVulnerabilities.html', vulnerabilidades=aux)
+
 
 if __name__ == '__main__':
     app.run()
