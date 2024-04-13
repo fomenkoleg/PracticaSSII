@@ -5,6 +5,7 @@ import analisisDatos_ejercicio2
 import analisisDatos_ejercicio3
 import analisisDatos_ejercicio4
 import ejercicio3_5
+from analisisDatosSSII import ejercicio1_2
 
 app = Flask(__name__)
 
@@ -51,7 +52,7 @@ def hello_world():
 def parte1():
     return render_template('parte1.html')
 @app.route('/parte2')
-def usuariosCriticos():
+def parte2():
     return render_template('parte2.html')
 
 @app.route('/parte2/usuariosCriticos')
@@ -67,6 +68,19 @@ def uCritic():
     aux = analisisDatos_ejercicio4.ejercicio_headnum(int(numberlines))
     show = aux.to_string().replace("\n", "<br>")
     return show
+
+@app.route('/parte2/wedDesactualizadas')
+def websDesactualizadas():
+    return render_template('outdateWeb.html')
+
+@app.route('/parte2/wedDesactualizadas/top')
+def wDesactualizadas():
+    numberlines = request.args.get('numberline')
+    if(int(numberlines) < 0):
+        return "Entrada incorrecta"
+
+    aux = ejercicio1_2.top_webs(int(numberlines))
+    return aux
 
 @app.route('/parte2/ultimasVulnerabilidades')
 def lastVulnerabilities():
