@@ -69,11 +69,11 @@ def uCritic():
     show = aux.to_string().replace("\n", "<br>")
     return show
 
-@app.route('/parte2/wedDesactualizadas')
+@app.route('/parte2/webDesactualizadas')
 def websDesactualizadas():
     return render_template('outdateWeb.html')
 
-@app.route('/parte2/wedDesactualizadas/top')
+@app.route('/parte2/webDesactualizadas/')
 def wDesactualizadas():
     numberlines = request.args.get('numberline')
     if(int(numberlines) < 0):
