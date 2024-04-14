@@ -1,5 +1,6 @@
 import sqlite3
 import matplotlib.pyplot as plt
+import numpy
 import pandas as pd
 import numpy as np
 
@@ -107,6 +108,25 @@ def ejercicio_headnum(num):
     elif num < -1 or num == 0:
         return None
     return df_inseguros.head(num)
+
+def datosEntrenamiento():
+    conn = sqlite3.connect('users_data_online.db')
+    query_inseguros = 'SELECT username, emails_clicados, emails_phishing FROM user_data_online WHERE pass_complexity IS 0 AND emails_clicados IS NOT "None" AND emails_phishing IS NOT "None";'
+    df_inseguros = pd.read_sql_query(query_inseguros, conn)
+    df_inseguros['probabilidad_phishing'] = (df_inseguros['emails_clicados']/df_inseguros['emails_phishing'])*100
+    df_inseguros.fillna(0, inplace=True)
+    l = df_inseguros["emails_clicados"].to_numpy()
+    n = df_inseguros["emails_phishing"].to_numpy()
+    lis = []
+    for i in range(len(l)):
+        aux = []
+        aux.append(l[i])
+        aux.append(n[i])
+        aux = numpy.array(aux)
+        lis.append(aux)
+    re = numpy.array(lis)
+    return re, df_inseguros['probabilidad_phishing'].to_numpy()
+
 
 def ejercicio4_3():
 
