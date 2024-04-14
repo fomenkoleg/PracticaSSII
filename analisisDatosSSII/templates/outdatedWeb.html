@@ -4,38 +4,46 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Critic Users</title>
+    <title>Outdate Webs</title>
 </head>
+
 <body>
+
 <div style="height: 60px;"></div>
 <div class="container" style="height: 68px;">
-        <h1 style="text-align: center;font-size: 30px;">Top de Usuarios Criticos</h1>
+        <h1 style="text-align: center;font-size: 30px;">Top de Webs Desactualizadas</h1>
 </div>
 
 <div style="height: 20px;"></div>
 <div class="container" style="text-align: center;">
-    <form action="/parte2/usuariosCriticos/" method="get">
-    <label>Introduce el top:</label>
-    <input type="number" name="numberline">
+    <form action="/parte2/webDesactualizadas/" method="get">
+    <label for="numberline">Introduce el top:</label>
+    <input type="number" id="numberline" name="numberline">
     <input type="submit" value="Mostrar">
 </form>
 </div>
 
 <div style="height: 30px;"></div>
 <div class="container" style="text-align: center;">
-    {% if usuarios %}
-    <table class="mx-auto">
+    {% if desactualizadas %}
+    <table class="mx-auto" border="1" cellpadding="5">
         <thead>
             <tr>
-                <th>Usuario</th>
-                <th>Telefono</th>
+                <th>Web</th>
+                <th>Creación</th>
+                <th>Cookies</th>
+                <th>Aviso</th>
+                <th>Protección</th>
             </tr>
         </thead>
         <tbody>
-            {% for user in usuarios %}
+            {% for pagina in desactualizadas %}
             <tr>
-                <td>{{ user.username }}</td>
-                <td>{{ user.telefono }}</td>
+                <td>{{ pagina.web }}</td>
+                <td>{{ pagina.creacion }}</td>
+                <td>{{ pagina.cookies }}</td>
+                <td>{{ pagina.aviso }}</td>
+                <td>{{ pagina.proteccion }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -43,7 +51,6 @@
 {% endif %}
 </div>
 <div style="height: 50px;"></div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
