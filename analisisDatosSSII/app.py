@@ -6,6 +6,7 @@ import analisisDatos_ejercicio3
 import analisisDatos_ejercicio4
 import ejercicio3_5
 from analisisDatosSSII import ejercicio1_2
+import LinearRegressionUsers
 
 app = Flask(__name__)
 
@@ -89,6 +90,16 @@ def lastVulnerabilities():
     return aux
     #return render_template('lastVulnerabilities.html', vulnerabilidades=aux)
 
+@app.route('/parte2/prediccion/lineal')
+def predictUser():
+    return render_template('preddictUser.html')
+
+@app.route('/parte2/prediccion/lineal/')
+def predict():
+    numberEmails = request.args.get('emails')
+    #numberPhising = request.args.get('phising')
+    aux = LinearRegressionUsers.func(int(numberEmails))
+    return str(aux)
 
 if __name__ == '__main__':
     app.run()
