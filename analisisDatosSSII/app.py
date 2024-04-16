@@ -70,10 +70,10 @@ def uCritic():
     if int(numberlines) <= 0:
         return render_template('error.html')
 
-    aux = analisisDatos_ejercicio4.ejercicio_headnum(int(numberlines))
-    show = aux.to_string().replace("\n", "<br>")
-    return show
-    #return render_template('userCritic.html', usuarios=show)
+    aux = analisisDatos_ejercicio4.ejercicio_headnum(int(numberlines)).to_dict(orient='records')
+    #show = aux.to_string().replace("\n", "<br>")
+    #return show
+    return render_template('userCritic.html', usuarios=aux)
 
 @app.route('/parte2/usuariosCriticosSelect/')
 def uCriticSelect():
@@ -82,10 +82,10 @@ def uCriticSelect():
     if int(numberlines) <= 0 or int(mitad) not in [1, 2]:
         return render_template('error.html')
 
-    aux = analisisDatos_ejercicio4.ejercicio_50percent(int(mitad), int(numberlines))
-    show = aux.to_string().replace("\n", "<br>")
-    return show
-    #return render_template('userCritic.html', usuarios=show)
+    aux = analisisDatos_ejercicio4.ejercicio_50percent(int(mitad), int(numberlines)).to_dict(orient='records')
+    #show = aux.to_string().replace("\n", "<br>")
+    #return show
+    return render_template('userCriticHalves.html', usuarios=aux)
 
 @app.route('/parte2/webDesactualizadas')
 def websOutdated():
