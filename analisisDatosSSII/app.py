@@ -5,7 +5,7 @@ import analisisDatos_ejercicio2
 import analisisDatos_ejercicio3
 import analisisDatos_ejercicio4
 import ejercicio3_5
-from analisisDatosSSII import ejercicio1_2
+import ejercicio1_2
 import LinearRegressionUsers
 
 app = Flask(__name__)
