@@ -29,14 +29,14 @@
         <thead>
             <tr>
                 <th>Usuario</th>
-                <th>Telefono</th>
+                <th>% Prob. Phishing</th>
             </tr>
         </thead>
         <tbody>
             {% for user in usuarios %}
             <tr>
                 <td>{{ user.username }}</td>
-                <td>{{ user.telefono }}</td>
+                <td>{{ user.probabilidad_phishing }}</td>
             </tr>
             {% endfor %}
         </tbody>
