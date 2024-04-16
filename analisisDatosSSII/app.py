@@ -25,7 +25,13 @@ def ejercicio4():
     for line in palabras2.split('\n'):
         text2 += Markup.escape(line) + Markup('<br />')
     for line in palabras3.split('\n'):
-        text3 += Markup.escape(line) + Markup('<br />')
+        text3 += (Markup.escape(line) + Markup('<br />'))
+
+@app.route('/parte1/ejercicio3')
+def ejercicio3():  # put application's code here
+    aux = analisisDatos_ejercicio3.ejercicio3()
+    aux2 = aux.replace("\n", "<br>")
+    return aux2
     for line in palabras4.split('\n'):
         text4 += Markup.escape(line) + Markup('<br />')
 
@@ -33,11 +39,7 @@ def ejercicio4():
     #palabras = palabras.replace("\r", "<br>")
     return render_template('ejercicio4.html', ejer1=text, ejer2=text2, ejer3=text3, ejer4=text4)
 
-@app.route('/parte1/ejercicio3')
-def ejercicio3():  # put application's code here
-    aux = analisisDatos_ejercicio3.ejercicio3()
-    aux2 = aux.replace("\n", "<br>")
-    return aux2
+
 
 @app.route('/parte1/ejercicio2')
 def ejercicio2():  # put application's code here
