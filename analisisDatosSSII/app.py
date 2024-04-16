@@ -60,8 +60,25 @@ def parte2():
 def userCritic():
     return render_template('userCritic.html')
 
+@app.route('/parte2/usuariosCriticosSelect')
+def userCriticSelect():
+    return render_template('userCriticHalves.html')
+
+
 @app.route('/parte2/usuariosCriticos/')
 def uCritic():
+    numberlines = request.args.get('numberline')
+
+    if int(numberlines) <= 0:
+        return "Entrada incorrecta"
+
+    aux = analisisDatos_ejercicio4.ejercicio_headnum(int(numberlines))
+    show = aux.to_string().replace("\n", "<br>")
+    return show
+    #return render_template('userCritic.html', usuarios=show)
+
+@app.route('/parte2/usuariosCriticosSelect/')
+def uCriticHalves():
     numberlines = request.args.get('numberline')
     mitad = request.args.get('mitad')
     if int(numberlines) <= 0 or int(mitad) not in [1, 2]:
@@ -79,7 +96,7 @@ def websOutdated():
 @app.route('/parte2/webDesactualizadas/')
 def wOutdated():
     numberlines = request.args.get('numberline')
-    if(int(numberlines) < 0):
+    if(int(numberlines) <= 0):
         return "Entrada incorrecta"
 
     aux = ejercicio1_2.top_webs(int(numberlines))
@@ -98,8 +115,11 @@ def predictUser():
 @app.route('/parte2/prediccion/lineal/')
 def predict():
     numberEmails = request.args.get('emails')
+    numberEmails = int(numberEmails)
+    if numberEmails < 0:
+        return "Entrada incorrecta"
     #numberPhising = request.args.get('phising')
-    aux = LinearRegressionUsers.func(int(numberEmails))
+    aux = LinearRegressionUsers.func(numberEmails)
     return str(aux)
 
 if __name__ == '__main__':
