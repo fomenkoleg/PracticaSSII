@@ -10,7 +10,8 @@ def ejercicio4API():
         titulo = historia['title']
         autor = historia['by']
         url = historia['url']
-        l.append(f'<h2>{titulo}</h2><br>Autor: {autor}<br>URL: <a href="{url}">{url}</a><br>')
+        text = historia['text']
+        l.append(f'<h2>{titulo}</h2>Autor: {autor}<br>URL: <a href="{url}">{url}</a><br>Texto: {text}')
     news = ''
     for i in l:
         news = news + i + '<br><br>'
