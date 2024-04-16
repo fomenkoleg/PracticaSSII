@@ -6,6 +6,7 @@ import analisisDatos_ejercicio3
 import analisisDatos_ejercicio4
 import ejercicio3_5
 import ejercicio1_2
+import ejercicio4_api
 import LinearRegressionUsers
 
 app = Flask(__name__)
@@ -105,6 +106,11 @@ def wOutdated():
 @app.route('/parte2/ultimasVulnerabilidades')
 def lastVulnerabilities():
     aux = ejercicio3_5.prueba()
+    return aux
+
+@app.route('/parte2/hackerNews')
+def lastNews():
+    aux = ejercicio4_api.ejercicio4API()
     return aux
 
 @app.route('/parte2/prediccion/lineal')
