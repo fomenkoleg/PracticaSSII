@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 import analisisDatos_ejercicio4
 
 def func(emails):
-# Load the diabetes dataset
+# Load the dataset
     users_X, users_y = analisisDatos_ejercicio4.datosEntrenamiento()
 # Use only one feature
     users_X = users_X[:, np.newaxis, 0]

@@ -1,4 +1,6 @@
 import sqlite3
+import sys
+
 import matplotlib.pyplot as plt
 import numpy
 import pandas as pd
@@ -185,18 +187,23 @@ def ejercicio4_4():
     #plt.show()
     return answer
 
-def ejercicio_50percent(mitad):
-    df = ejercicio_headnum(-1)
+def ejercicio_50percent(mitad, num):
+    df = ejercicio_headnum(sys.maxsize)
     if mitad == 1:
         df = df[df['probabilidad_phishing'] <= 50]
     elif mitad == 2:
         df = df[df['probabilidad_phishing'] > 50]
-    return df
+    if num > df.shape[0]:
+        return df
+    elif num <= 0:
+        return None
+    return df.head(num)
+
 
 if __name__ == '__main__':
     ejercicio4_1()
     ejercicio4_2()
     ejercicio4_3()
     ejercicio4_4()
-    ejercicio_50percent(2)
+    ejercicio_50percent(2, 4)
     ejercicio_headnum(10)
