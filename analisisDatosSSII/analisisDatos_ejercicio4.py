@@ -1,3 +1,4 @@
+import json
 import sqlite3
 import sys
 
@@ -113,21 +114,37 @@ def ejercicio_headnum(num):
 
 def datosEntrenamiento():
     conn = sqlite3.connect('users_data_online.db')
-    query_inseguros = 'SELECT username, emails_clicados, emails_phishing FROM user_data_online WHERE pass_complexity IS 0 AND emails_clicados IS NOT "None" AND emails_phishing IS NOT "None";'
+    query_inseguros = 'SELECT * FROM user_data_online;'
     df_inseguros = pd.read_sql_query(query_inseguros, conn)
-    df_inseguros['probabilidad_phishing'] = (df_inseguros['emails_clicados']/df_inseguros['emails_phishing'])*100
+    df_inseguros.drop(['username','hash_password','province','tel_num'], axis=1, inplace=True)
+    #df_inseguros['probabilidad_phishing'] = (df_inseguros['emails_clicados']/df_inseguros['emails_phishing'])*100
     df_inseguros.fillna(0, inplace=True)
     l = df_inseguros["emails_clicados"].to_numpy()
     n = df_inseguros["emails_phishing"].to_numpy()
+    aux = df_inseguros.to_numpy()
     lis = []
-    for i in range(len(l)):
-        aux = []
-        aux.append(l[i])
-        aux.append(n[i])
-        aux = numpy.array(aux)
-        lis.append(aux)
-    re = numpy.array(lis)
-    return re, df_inseguros['probabilidad_phishing'].to_numpy()
+    #for i in range(len(l)):
+    #    aux = []
+    #    aux.append(l[i])
+    #    aux.append(n[i])
+    #    aux = numpy.array(aux)
+    #    lis.append(aux)
+    #re = numpy.array(lis)
+    correctFichero = open("../package.json", 'r')
+    correct = json.load(correctFichero)
+    peligro = []
+    cont = 0
+    keys = []
+    for i in range(len(correct['usuarios'])):
+        for key in correct['usuarios'][i]:
+            keys.append(key)
+    for i in correct['usuarios']:
+        #aux1 = [i[keys[cont]]['critico']]
+        #peligro.append(np.array(aux1))
+        peligro.append(i[keys[cont]]['critico'])
+        cont += 1
+    peligroNP = np.array(peligro)
+    return aux, peligroNP
 
 
 def ejercicio4_3():

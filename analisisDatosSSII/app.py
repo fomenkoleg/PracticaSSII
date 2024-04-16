@@ -7,6 +7,7 @@ import analisisDatos_ejercicio4
 import ejercicio3_5
 from analisisDatosSSII import ejercicio1_2
 import LinearRegressionUsers
+import RandomForestUsers
 
 app = Flask(__name__)
 
@@ -113,8 +114,28 @@ def predictUser():
 @app.route('/parte2/prediccion/lineal/')
 def predict():
     numberEmails = request.args.get('emails')
-    #numberPhising = request.args.get('phising')
-    aux = LinearRegressionUsers.func(int(numberEmails))
+    numberclic = request.args.get('clic')
+    numberEmails = int(numberEmails)
+    numberclic = int(numberclic)
+    if numberEmails <= 0:
+        return render_template('error.html')
+    aux = LinearRegressionUsers.func(numberclic/numberEmails)
+    return str(aux)
+
+@app.route('/parte2/prediccion/RF')
+def predictUserRF():
+    return render_template('preddictUserRF.html')
+
+@app.route('/parte2/prediccion/RF/')
+def predictRF():
+    numberPass = request.args.get('pass')
+    numberPerms = request.args.get('perms')
+    numberClic = request.args.get('clic')
+    numberEmails = request.args.get('emails')
+    numberPhising = request.args.get('phishing')
+    if int(numberEmails) < 0 or (int(numberPhising) > int(numberEmails) or int(numberClic) > int(numberEmails)):
+        return render_template('error.html')
+    aux = RandomForestUsers.randomForestUser(int(numberPass), int(numberPerms), int(numberClic),int(numberEmails), int(numberPhising))
     return str(aux)
 
 if __name__ == '__main__':

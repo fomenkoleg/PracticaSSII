@@ -6,9 +6,17 @@ import analisisDatos_ejercicio4
 
 def func(emails):
 # Load the dataset
+
     users_X, users_y = analisisDatos_ejercicio4.datosEntrenamiento()
+    X = []
 # Use only one feature
-    users_X = users_X[:, np.newaxis, 0]
+    for i in users_X:
+        pas, perm, em, phis, clic = i
+        aux =[clic/em]
+        aux = np.array(aux)
+        X.append(aux)
+
+    users_X = np.array(X)
 # Split the data into training/testing sets
     users_X_train = users_X[:int(-0.40*len(users_X))]
     users_X_test = users_X[int(-0.40*len(users_X)):]
@@ -33,4 +41,7 @@ def func(emails):
     l = [emails]
     aux = [np.array(l)]
     e = regr.predict(np.array(aux))
+    print(str(e[0]))
     return e[0]
+
+func(0.12)
