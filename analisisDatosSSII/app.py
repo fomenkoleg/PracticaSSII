@@ -60,8 +60,23 @@ def parte2():
 def userCritic():
     return render_template('userCritic.html')
 
+@app.route('/parte2/usuariosCriticosSelect')
+def userCriticSelect():
+    return render_template('userCriticHalves.html')
+
 @app.route('/parte2/usuariosCriticos/')
 def uCritic():
+    numberlines = request.args.get('numberline')
+    if int(numberlines) <= 0:
+        return render_template('error.html')
+
+    aux = analisisDatos_ejercicio4.ejercicio_headnum(int(numberlines))
+    show = aux.to_string().replace("\n", "<br>")
+    return show
+    #return render_template('userCritic.html', usuarios=show)
+
+@app.route('/parte2/usuariosCriticosSelect/')
+def uCriticSelect():
     numberlines = request.args.get('numberline')
     mitad = request.args.get('mitad')
     if int(numberlines) <= 0 or int(mitad) not in [1, 2]:
