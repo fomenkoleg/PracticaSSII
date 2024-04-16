@@ -121,11 +121,10 @@ def predictUser():
 @app.route('/parte2/prediccion/lineal/')
 def predict():
     numberEmails = request.args.get('emails')
-<<<<<<< HEAD
     numberclic = request.args.get('clic')
     numberEmails = int(numberEmails)
     numberclic = int(numberclic)
-    if numberEmails <= 0:
+    if numberEmails <= 0 or numberclic > numberEmails:
         return render_template('error.html')
     aux = LinearRegressionUsers.func(numberclic/numberEmails)
     return str(aux)
@@ -144,12 +143,11 @@ def predictRF():
     if int(numberEmails) < 0 or (int(numberPhising) > int(numberEmails) or int(numberClic) > int(numberEmails)):
         return render_template('error.html')
     aux = RandomForestUsers.randomForestUser(int(numberPass), int(numberPerms), int(numberClic),int(numberEmails), int(numberPhising))
-    return str(aux)
-=======
-    #numberPhising = request.args.get('phising')
-    aux = LinearRegressionUsers.func(int(numberEmails))
     return render_template('preddictUser.html', probabilidad=str(aux))
->>>>>>> a33932cd65fde42b14b3315c06f4a9a1f87190d9
+
+    #numberPhising = request.args.get('phising')
+
+
 
 if __name__ == '__main__':
     app.run()
