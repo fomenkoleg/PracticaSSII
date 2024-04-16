@@ -5,7 +5,8 @@ import analisisDatos_ejercicio2
 import analisisDatos_ejercicio3
 import analisisDatos_ejercicio4
 import ejercicio3_5
-from analisisDatosSSII import ejercicio1_2
+import ejercicio1_2
+import ejercicio4_api
 import LinearRegressionUsers
 import RandomForestUsers
 
@@ -26,7 +27,13 @@ def ejercicio4():
     for line in palabras2.split('\n'):
         text2 += Markup.escape(line) + Markup('<br />')
     for line in palabras3.split('\n'):
-        text3 += Markup.escape(line) + Markup('<br />')
+        text3 += (Markup.escape(line) + Markup('<br />'))
+
+@app.route('/parte1/ejercicio3')
+def ejercicio3():  # put application's code here
+    aux = analisisDatos_ejercicio3.ejercicio3()
+    aux2 = aux.replace("\n", "<br>")
+    return aux2
     for line in palabras4.split('\n'):
         text4 += Markup.escape(line) + Markup('<br />')
 
@@ -34,11 +41,7 @@ def ejercicio4():
     #palabras = palabras.replace("\r", "<br>")
     return render_template('ejercicio4.html', ejer1=text, ejer2=text2, ejer3=text3, ejer4=text4)
 
-@app.route('/parte1/ejercicio3')
-def ejercicio3():  # put application's code here
-    aux = analisisDatos_ejercicio3.ejercicio3()
-    aux2 = aux.replace("\n", "<br>")
-    return aux2
+
 
 @app.route('/parte1/ejercicio2')
 def ejercicio2():  # put application's code here
@@ -71,10 +74,10 @@ def uCritic():
     if int(numberlines) <= 0:
         return render_template('error.html')
 
-    aux = analisisDatos_ejercicio4.ejercicio_headnum(int(numberlines))
-    show = aux.to_string().replace("\n", "<br>")
-    return show
-    #return render_template('userCritic.html', usuarios=show)
+    aux = analisisDatos_ejercicio4.ejercicio_headnum(int(numberlines)).to_dict(orient='records')
+    #show = aux.to_string().replace("\n", "<br>")
+    #return show
+    return render_template('userCritic.html', usuarios=aux)
 
 @app.route('/parte2/usuariosCriticosSelect/')
 def uCriticSelect():
@@ -83,10 +86,10 @@ def uCriticSelect():
     if int(numberlines) <= 0 or int(mitad) not in [1, 2]:
         return render_template('error.html')
 
-    aux = analisisDatos_ejercicio4.ejercicio_50percent(int(mitad), int(numberlines))
-    show = aux.to_string().replace("\n", "<br>")
-    return show
-    #return render_template('userCritic.html', usuarios=show)
+    aux = analisisDatos_ejercicio4.ejercicio_50percent(int(mitad), int(numberlines)).to_dict(orient='records')
+    #show = aux.to_string().replace("\n", "<br>")
+    #return show
+    return render_template('userCriticHalves.html', usuarios=aux)
 
 @app.route('/parte2/webDesactualizadas')
 def websOutdated():
@@ -105,7 +108,11 @@ def wOutdated():
 def lastVulnerabilities():
     aux = ejercicio3_5.prueba()
     return aux
-    #return render_template('lastVulnerabilities.html', vulnerabilidades=aux)
+
+@app.route('/parte2/hackerNews')
+def lastNews():
+    aux = ejercicio4_api.ejercicio4API()
+    return aux
 
 @app.route('/parte2/prediccion/lineal')
 def predictUser():
@@ -114,6 +121,7 @@ def predictUser():
 @app.route('/parte2/prediccion/lineal/')
 def predict():
     numberEmails = request.args.get('emails')
+<<<<<<< HEAD
     numberclic = request.args.get('clic')
     numberEmails = int(numberEmails)
     numberclic = int(numberclic)
@@ -137,6 +145,11 @@ def predictRF():
         return render_template('error.html')
     aux = RandomForestUsers.randomForestUser(int(numberPass), int(numberPerms), int(numberClic),int(numberEmails), int(numberPhising))
     return str(aux)
+=======
+    #numberPhising = request.args.get('phising')
+    aux = LinearRegressionUsers.func(int(numberEmails))
+    return render_template('preddictUser.html', probabilidad=str(aux))
+>>>>>>> a33932cd65fde42b14b3315c06f4a9a1f87190d9
 
 if __name__ == '__main__':
     app.run()
