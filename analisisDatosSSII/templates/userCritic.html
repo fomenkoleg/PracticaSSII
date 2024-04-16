@@ -17,7 +17,6 @@
     <form action="/parte2/usuariosCriticos/" method="get">
     <label>Introduce el top:</label>
     <input type="number" name="numberline">
-
     <input type="submit" value="Mostrar">
 </form>
 </div>
@@ -25,7 +24,7 @@
 <div style="height: 30px;"></div>
 <div class="container" style="text-align: center;">
     {% if usuarios %}
-    <table class="mx-auto">
+    <table class="mx-auto" border="1" cellpadding="5">
         <thead>
             <tr>
                 <th>Usuario</th>

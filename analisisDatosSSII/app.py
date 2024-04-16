@@ -104,7 +104,6 @@ def wOutdated():
 def lastVulnerabilities():
     aux = ejercicio3_5.prueba()
     return aux
-    #return render_template('lastVulnerabilities.html', vulnerabilidades=aux)
 
 @app.route('/parte2/prediccion/lineal')
 def predictUser():
@@ -115,7 +114,7 @@ def predict():
     numberEmails = request.args.get('emails')
     #numberPhising = request.args.get('phising')
     aux = LinearRegressionUsers.func(int(numberEmails))
-    return str(aux)
+    return render_template('preddictUser.html', probabilidad=str(aux))
 
 if __name__ == '__main__':
     app.run()
