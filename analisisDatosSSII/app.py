@@ -65,7 +65,7 @@ def uCritic():
     numberlines = request.args.get('numberline')
     mitad = request.args.get('mitad')
     if int(numberlines) <= 0 or int(mitad) not in [1, 2]:
-        return "Entrada incorrecta"
+        return render_template('error.html')
 
     aux = analisisDatos_ejercicio4.ejercicio_50percent(int(mitad), int(numberlines))
     show = aux.to_string().replace("\n", "<br>")
@@ -80,7 +80,7 @@ def websOutdated():
 def wOutdated():
     numberlines = request.args.get('numberline')
     if(int(numberlines) < 0):
-        return "Entrada incorrecta"
+        return render_template('error.html')
 
     aux = ejercicio1_2.top_webs(int(numberlines))
     return render_template('outdatedWeb.html', desactualizadas=aux)
