@@ -142,8 +142,16 @@ def predictRF():
     numberPhising = request.args.get('phishing')
     if int(numberEmails) < 0 or (int(numberPhising) > int(numberEmails) or int(numberClic) > int(numberEmails)):
         return render_template('error.html')
+    if numberPass == 'on':
+        numberPass = 1
+    else:
+        numberPass = 0
+    if numberPerms == 'on':
+        numberPerms = 1
+    else:
+        numberPerms = 0
     aux = RandomForestUsers.randomForestUser(int(numberPass), int(numberPerms), int(numberClic),int(numberEmails), int(numberPhising))
-    return render_template('preddictUser.html', probabilidad=str(aux))
+    return str(aux[0])
 
     #numberPhising = request.args.get('phising')
 
