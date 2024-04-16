@@ -3,8 +3,7 @@ from sklearn.tree import export_graphviz
 from subprocess import call
 import analisisDatos_ejercicio4
 import numpy as np
-import graphviz #https://graphviz.org/download/
-#Split data
+
 
 def randomForestUser(pas, perms, clic, emails, phising):
     usersData, usersTarget = analisisDatos_ejercicio4.datosEntrenamiento()
