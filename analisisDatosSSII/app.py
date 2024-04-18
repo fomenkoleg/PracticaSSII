@@ -1,5 +1,6 @@
 import io
 import requests
+from bs4 import BeautifulSoup
 from markupsafe import Markup
 from flask import Flask, render_template, request, make_response
 from xhtml2pdf import pisa
@@ -88,9 +89,16 @@ def download():
     numberlines = request.args.get('numberline')
     html_content = requests.get(f"http://127.0.0.1:5000/parte2/usuariosCriticos/?numberline={numberlines}").content
 
+    soup = BeautifulSoup(html_content, 'html.parser')
+    first_container = soup.findAll('div', {'class': 'container'})[1]
+    first_container.decompose()
+    pdf_button = soup.find('a', class_='btn btn-primary')
+    pdf_button.decompose()
+    modified_html = str(soup)
+
     pdf_data = io.BytesIO()
 
-    pisa.CreatePDF(html_content, dest=pdf_data)
+    pisa.CreatePDF(modified_html, dest=pdf_data)
 
     pdf_data.seek(0)
     pdf_content = pdf_data.read()
@@ -114,6 +122,32 @@ def uCriticSelect():
     #return show
     return render_template('userCriticHalves.html', usuarios=aux)
 
+@app.route('/parte2/usuariosCriticosSelect/downloadPDF')
+def pdfCriticSelect():
+    numberlines = request.args.get('numberline')
+    mitad = request.args.get('mitad')
+    html_content = requests.get(f"http://127.0.0.1:5000/parte2/usuariosCriticosSelect/?numberline={numberlines}&mitad={mitad}").content
+
+    soup = BeautifulSoup(html_content, 'html.parser')
+    first_container = soup.findAll('div', {'class': 'container'})[1]
+    first_container.decompose()
+    pdf_button = soup.find('a', class_='btn btn-primary')
+    pdf_button.decompose()
+    modified_html = str(soup)
+
+    pdf_data = io.BytesIO()
+
+    pisa.CreatePDF(modified_html, dest=pdf_data)
+
+    pdf_data.seek(0)
+    pdf_content = pdf_data.read()
+
+    response = make_response(pdf_content)
+    response.headers['Content-Disposition'] = 'attachment; filename=UsuariosCriticosMitades.pdf'
+    response.headers['Content-Type'] = 'application/pdf'
+
+    return response
+
 @app.route('/parte2/webDesactualizadas')
 def websOutdated():
     return render_template('outdatedWeb.html')
@@ -126,6 +160,31 @@ def wOutdated():
 
     aux = ejercicio1_2.top_webs(int(numberlines))
     return render_template('outdatedWeb.html', desactualizadas=aux)
+
+@app.route('/parte2/websDesactualizadas/downloadPDF')
+def webDesacPDF():
+    numberlines = request.args.get('numberline')
+    html_content = requests.get(f"http://127.0.0.1:5000/parte2/webDesactualizadas/?numberline={numberlines}").content
+
+    soup = BeautifulSoup(html_content, 'html.parser')
+    first_container = soup.findAll('div', {'class': 'container'})[1]
+    first_container.decompose()
+    pdf_button = soup.find('a', class_='btn btn-primary')
+    pdf_button.decompose()
+    modified_html = str(soup)
+
+    pdf_data = io.BytesIO()
+
+    pisa.CreatePDF(modified_html, dest=pdf_data)
+
+    pdf_data.seek(0)
+    pdf_content = pdf_data.read()
+
+    response = make_response(pdf_content)
+    response.headers['Content-Disposition'] = 'attachment; filename=WebsDesactualizadas.pdf'
+    response.headers['Content-Type'] = 'application/pdf'
+
+    return response
 
 @app.route('/parte2/ultimasVulnerabilidades')
 def lastVulnerabilities():
