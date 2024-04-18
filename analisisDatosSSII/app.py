@@ -1,13 +1,8 @@
-import datetime
 import io
-
 import requests
 from markupsafe import Markup
 from flask import Flask, render_template, request, make_response
-from fpdf import FPDF
-from fpdf.html import HTMLMixin
 from xhtml2pdf import pisa
-import pdfkit
 import analisisDatos_ejercicio2
 import analisisDatos_ejercicio3
 import analisisDatos_ejercicio4
@@ -16,7 +11,7 @@ import ejercicio1_2
 import ejercicio4_api
 import LinearRegressionUsers
 import RandomForestUsers
-import os
+
 
 app = Flask(__name__)
 
@@ -91,7 +86,7 @@ def uCritic():
 @app.route('/parte2/usuariosCriticos/downloadPDF')
 def download():
     numberlines = request.args.get('numberline')
-    html_content = requests.get(f"http://127.0.0.1:5000/parte2/usuariosCriticos/?numberline=12").content
+    html_content = requests.get(f"http://127.0.0.1:5000/parte2/usuariosCriticos/?numberline={numberlines}").content
 
     pdf_data = io.BytesIO()
 
