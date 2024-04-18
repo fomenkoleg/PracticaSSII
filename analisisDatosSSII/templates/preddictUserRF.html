@@ -4,12 +4,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Predict User</title>
 </head>
 <body>
 <div style="height: 60px;"></div>
 <div class="container" style="height: 68px;">
-        <h1 style="text-align: center;font-size: 30px;">Top de Webs Desactualizadas</h1>
+        <h1 style="text-align: center;font-size: 30px;">Predicción de Usuarios (Random Forest)</h1>
 </div>
 
 <div style="height: 20px;"></div>
@@ -21,12 +21,23 @@
     <input type="checkbox" id="permsCheckbox" name="perms"><br/>
     <label>Introduce el numero de emails que el usuario ha recibido:</label>
     <input type="number" name="emails"><br/>
-    <label>Introduce el numero de phishing que el usuario ha clicado:</label>
+    <label>Introduce el numero de emails que el usuario ha clicado:</label>
     <input type="number" name="clic"><br/>
     <label>Introduce el numero de phishing que el usuario ha sido victima:</label>
     <input type="number" name="phishing"><br/>
     <input type="submit" value="Mostrar" />
 </form>
+</div>
+<div style="height: 30px;"></div>
+<div class="container" style="text-align: center;">
+    {% if prediccion is defined %}
+      <h4>¿Usuario Crítico?</h4>
+        {% if prediccion == 1 %}
+            <p>Sí es un Usuario Crítico</p>
+        {% else %}
+            <p>No es un Usuario Crítico</p>
+        {% endif %}
+    {% endif %}
 </div>
 <script>
     // Función para convertir los valores de los checkboxes a booleanos

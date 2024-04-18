@@ -4,13 +4,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Predict User</title>
 </head>
 <body>
 
 <div style="height: 60px;"></div>
 <div class="container" style="height: 68px;">
-        <h1 style="text-align: center;font-size: 30px;">Top de Webs Desactualizadas</h1>
+        <h1 style="text-align: center;font-size: 30px;">Predicción de Usuarios (Lineal)</h1>
 </div>
 
 <div style="height: 20px;"></div>
@@ -22,6 +22,15 @@
     <input type="number" name="clic"><br/>
     <input type="submit" value="Mostrar" />
 </form>
+</div>
+<div style="height: 30px;"></div>
+<div class="container" style="text-align: center;">
+    {% if prediccionLineal is defined %}
+    <h4>La probabilidad de que sea un Usuario Crítico es: {{prediccionLineal}}</h4>
+    {% endif %}
+</div>
+
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 

@@ -127,7 +127,9 @@ def predict():
     if numberEmails <= 0 or numberclic > numberEmails:
         return render_template('error.html')
     aux = LinearRegressionUsers.func(numberclic/numberEmails)
-    return str(aux)
+    aux = aux * 100
+    aux = "{:.2f}%".format(aux)
+    return render_template('preddictUser.html', prediccionLineal=str(aux))
 
 @app.route('/parte2/prediccion/RF')
 def predictUserRF():
@@ -151,7 +153,7 @@ def predictRF():
     else:
         numberPerms = 0
     aux = RandomForestUsers.randomForestUser(int(numberPass), int(numberPerms), int(numberClic),int(numberEmails), int(numberPhising))
-    return str(aux[0])
+    return render_template('preddictUserRF.html', prediccion=str(aux[0]))
 
     #numberPhising = request.args.get('phising')
 
