@@ -16,7 +16,7 @@
 <div class="container" style="text-align: center;">
     <form action="/parte2/usuariosCriticosSelect/" method="get">
     <label>Introduce el top:</label>
-    <input type="number" name="numberline">
+    <input type="number" name="numberline" required>
     <select name="mitad">
         <option value="1"> <=50% probabilidad de phishing</option>
         <option value="2"> >50% probabilidad de phishing</option>
@@ -62,6 +62,11 @@
                 return pair[1];
             }
         }
+    }
+
+    if (getQueryVariable("numberline") == null) {
+        element = document.getElementById('pdfButton');
+        element.style.display = 'none';
     }
 
     inputNum = getQueryVariable("numberline");
