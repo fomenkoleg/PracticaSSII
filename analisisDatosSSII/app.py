@@ -1,8 +1,10 @@
 import io
+import os
+
 import requests
 from bs4 import BeautifulSoup
 from markupsafe import Markup
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, redirect, url_for
 from xhtml2pdf import pisa
 import analisisDatos_ejercicio2
 import analisisDatos_ejercicio3
@@ -239,6 +241,30 @@ def predictRF():
 
     #numberPhising = request.args.get('phising')
 
+
+@app.route('/parte2/comentarios')
+def comentario():
+    if not os.path.exists('comentarios.txt'):
+        return []
+
+    archivo = open('comentarios.txt', 'r')
+    comentarios = archivo.readlines()
+
+    return render_template('comentarios.html', comentarios=comentarios)
+
+
+@app.route('/parte2/comentarios/nuevo')
+def new_comment():
+    return render_template('form_comment.html')
+
+
+@app.route('/parte2/comentarios/nuevoComentario')
+def add_comment():
+    comment = request.args.get('contenido')
+    name = request.args.get('name')
+    archivo = open('comentarios.txt', 'a')
+    archivo.write(name + ': ' + comment + '\n')
+    return redirect(url_for('comentario'))
 
 
 if __name__ == '__main__':
