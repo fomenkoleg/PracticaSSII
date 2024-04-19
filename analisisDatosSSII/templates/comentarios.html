@@ -13,8 +13,9 @@
     </div>
 
     <div style="height: 40px;"></div>
-    <a class="btn btn-primary" id='newComment' type="button" href="/parte2/comentarios/nuevo">Nuevo comentario</a>
-
+    <div class="container" style="text-align: center;">
+        <a class="btn btn-primary" id='newComment' type="button" href="/parte2/comentarios/nuevo" style="display: inline-block;">Nuevo comentario</a>
+    </div>
 
     <div style="height: 40px;"></div>
     <div class="container" style="text-align: center;">
@@ -22,6 +23,11 @@
             {{ comentario }}
             <br><br>
         {% endfor %}
+    </div>
+
+    <div style="height: 40px;"></div>
+    <div class="container" style="text-align: center;">
+        <a class="btn btn-primary" id='return' type="button" href="/parte2" style="display: inline-block;">Volver</a>
     </div>
 
     </body>
