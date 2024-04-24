@@ -69,6 +69,11 @@
         element.style.display = 'none';
     }
 
+    if (getQueryVariable("numberline") == null && getQueryVariable("mitad") == null){
+        element = document.getElementById('pdfButton');
+        element.style.display = 'none';
+    }
+
     inputNum = getQueryVariable("numberline");
     inputHalf = getQueryVariable("mitad");
     url = "/parte2/usuariosCriticosSelect/downloadPDF"

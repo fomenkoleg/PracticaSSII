@@ -67,6 +67,10 @@
         }
     }
 
+    if (getQueryVariable("numberline") == null) {
+        element = document.getElementById('pdfButton');
+        element.style.display = 'none';
+    }
     inputNum = getQueryVariable("numberline");
     url = "/parte2/websDesactualizadas/downloadPDF"
     url = url + "?numberline=" + inputNum;
