@@ -7,7 +7,10 @@
     <title>Predict User</title>
 </head>
 <body>
-
+<div style="height: 20px;"></div>
+    <div class="container" style="text-align: right;">
+        <a class="btn btn-primary" id='return' type="button" href="/parte2" style="display: inline-block;">Volver</a>
+    </div>
 <div style="height: 60px;"></div>
 <div class="container" style="height: 68px;">
         <h1 style="text-align: center;font-size: 30px;">Predicción de Usuarios (Lineal)</h1>
@@ -16,9 +19,9 @@
 <div style="height: 20px;"></div>
 <div class="container" style="text-align: left;">
 <form action="/parte2/prediccion/lineal/" method="get">
-    <label>Introduce el numero de emails que el usuario a recibido:</label>
+    <label>Introduce el número de emails que el usuario a recibido:</label>
     <input type="number" name="emails"><br/>
-    <label>Introduce el numero de emails que el usuario ha clicado:</label>
+    <label>Introduce el número de emails que el usuario ha clicado:</label>
     <input type="number" name="clic"><br/>
     <input type="submit" value="Mostrar" />
 </form>
