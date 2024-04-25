@@ -13,6 +13,7 @@ import ejercicio3_5
 import ejercicio1_2
 import ejercicio4_api
 import LinearRegressionUsers
+import DecisionTreeUsers
 import RandomForestUsers
 
 
@@ -214,6 +215,33 @@ def predict():
     aux = aux * 100
     aux = "{:.2f}%".format(aux)
     return render_template('preddictUser.html', prediccionLineal=str(aux))
+
+
+@app.route('/parte2/prediccion/decisionTree')
+def predictUserDT():
+    return render_template('preddictUserDT.html')
+
+
+@app.route('/parte2/prediccion/decisionTree/')
+def predictDecisionTree():
+    numPass = request.args.get('password')
+    numPermisos = request.args.get('permisos')
+    numClic = request.args.get('clicados')
+    numEmail = request.args.get('emails')
+    numPhishing = request.args.get('phishing')
+    if int(numEmail) <= 0 or int(numClic) > int(numEmail):
+        return render_template('error.html')
+    if numPass == 'on':
+        numPass = 1
+    else:
+        numPass = 0
+    if numPermisos == 'on':
+        numPermisos = 1
+    else:
+        numPermisos = 0
+    aux = DecisionTreeUsers.decisionTreeUser(int(numPass), int(numPermisos), int(numClic), int(numEmail), int(numPhishing))
+    return render_template('preddictUserDT.html', prediccionDT=aux)
+
 
 @app.route('/parte2/prediccion/RF')
 def predictUserRF():

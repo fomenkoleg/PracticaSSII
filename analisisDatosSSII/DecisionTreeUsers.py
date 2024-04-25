@@ -5,7 +5,7 @@ import analisisDatos_ejercicio4
 import numpy as np
 
 
-def randomForestUser(pas, perms, clic, emails, phising):
+def decisionTreeUser(pas, perms, clic, emails, phising):
     usersData, usersTarget = analisisDatos_ejercicio4.datosEntrenamiento()
     X, y = usersData, usersTarget
     users_X_train = X[:int(-0.40 * len(X))]
@@ -27,4 +27,4 @@ def randomForestUser(pas, perms, clic, emails, phising):
     print(aux / len(users_X_test))
     return clf.predict(uTest)
 
-print(randomForestUser(0, 1, 23, 250, 1))
+print(decisionTreeUser(0, 1, 23, 250, 1))
