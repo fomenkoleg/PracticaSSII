@@ -26,8 +26,8 @@ def top_webs(top_x):
     # Filtrar las páginas web desactualizadas
     desactualizadas = df_webs[df_webs['puntuacion'] != 3]
 
-    #Ordenar las webs
-    desactualizadas = desactualizadas.sort_values(by=['puntuacion', 'creacion'], ascending=[False, True])
+    #Ordenar las webs 
+    desactualizadas = desactualizadas.sort_values(by=['puntuacion', 'creacion'], ascending=[True, True])
 
     return desactualizadas.head(top_x).to_dict(orient='records')
 
