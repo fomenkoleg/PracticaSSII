@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 
-def prueba():
+def vulnerabilidades():
     page = requests.get("https://cve.circl.lu/api/cve/CVE-2010-3333")
     aux = page.json()
     l = []

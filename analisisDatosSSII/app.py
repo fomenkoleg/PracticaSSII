@@ -191,7 +191,7 @@ def webDesacPDF():
 
 @app.route('/parte2/ultimasVulnerabilidades')
 def lastVulnerabilities():
-    aux = ejercicio3_5.prueba()
+    aux = ejercicio3_5.vulnerabilidades()
     return aux
 
 @app.route('/parte2/hackerNews')

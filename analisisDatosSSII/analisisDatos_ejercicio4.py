@@ -92,20 +92,14 @@ def ejercicio4_2():
 def ejercicio_headnum(num):
 
     conn = sqlite3.connect('users_data_online.db')
-    query_inseguros = 'SELECT username, emails_clicados, emails_phishing FROM user_data_online WHERE pass_complexity IS 0 AND emails_clicados IS NOT "None" AND emails_phishing IS NOT "None";'
+    query_inseguros = ('SELECT username, emails_clicados, emails_phishing FROM user_data_online WHERE '
+                       'pass_complexity IS 0 AND emails_clicados IS NOT "None" AND emails_phishing IS NOT "None";')
     df_inseguros = pd.read_sql_query(query_inseguros, conn)
     df_inseguros['probabilidad_phishing'] = (df_inseguros['emails_clicados']/df_inseguros['emails_phishing'])*100
     df_inseguros.fillna(0, inplace=True)
     df_inseguros.sort_values(by=['probabilidad_phishing'], inplace=True, ascending=False)
     df_inseguros.drop(['emails_clicados', 'emails_phishing'], axis=1, inplace=True)
 
-    df_inseguros.plot(kind='bar', x='username', color='aqua')
-    plt.title("Probabilidad de éxito de ataque de phishing")
-    plt.xlabel("Usuario")
-    plt.ylabel("Probabilidad de éxito")
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig("static/images/grafico2.png")
     if num > df_inseguros.shape[0]:
         return df_inseguros
     elif num < -1 or num == 0:
