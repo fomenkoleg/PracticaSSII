@@ -1,6 +1,7 @@
 from sklearn import tree
 from sklearn.tree import export_graphviz
 from subprocess import call
+import graphviz
 import analisisDatos_ejercicio4
 import numpy as np
 
@@ -25,6 +26,13 @@ def decisionTreeUser(pas, perms, clic, emails, phising):
         if test[i] == users_y_test[i]:
             aux += 1
     print(aux / len(users_X_test))
+
+    dot_data = tree.export_graphviz(clf, out_file=None, feature_names=X.dtype.names,
+                class_names=['No es crítico', 'Es crítico'], filled=True, rounded=True,
+                special_characters=True)
+    graph = graphviz.Source(dot_data)
+    graph.render('DecisionTree/tree.gv', view=True).replace('\\', '/')
+
     return clf.predict(uTest)
 
 print(decisionTreeUser(0, 1, 23, 250, 1))

@@ -19,10 +19,22 @@
 <div style="height: 20px;"></div>
 <div class="container" style="text-align: left;">
 <form action="/parte2/prediccion/lineal/" method="get">
+    <label>Introduce el nombre del usuario:</label>
+    <input type="text" name="usuario"><br/>
+    <label>Introduce el numero de teléfono:</label>
+    <input type="text" name="telefono"><br/>
+    <label>Introduce la provincia:</label>
+    <input type="text" name="provincia"><br/>
+    <label>Introduce si el usuario tiene contraseña debil:</label>
+    <input type="checkbox" id="passCheckbox" name="password"><br/>
+    <label>Introduce si el usuario tiene permisos</label>
+    <input type="checkbox" id="permsCheckbox" name="permisos"><br/>
     <label>Introduce el número de emails que el usuario a recibido:</label>
     <input type="number" name="emails"><br/>
     <label>Introduce el número de emails que el usuario ha clicado:</label>
     <input type="number" name="clic"><br/>
+    <label>Introduce el número de phishing que el usuario ha sido victima:</label>
+    <input type="number" name="phishing"><br/>
     <input type="submit" value="Mostrar" />
 </form>
 </div>
