@@ -1,8 +1,5 @@
 import sqlite3
-import matplotlib.pyplot as plt
 import pandas as pd
-import numpy as np
-
 
 def calcular_puntuacion(cookies, aviso, proteccion):
     return cookies + aviso + proteccion

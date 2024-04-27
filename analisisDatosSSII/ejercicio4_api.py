@@ -17,7 +17,10 @@ def ejercicio4API():
                     com2 = requests.get(f"https://hacker-news.firebaseio.com/v0/item/{top_comments[1]}.json").json()
                     com3 = requests.get(f"https://hacker-news.firebaseio.com/v0/item/{top_comments[2]}.json").json()
                     for kid in [com1, com2, com3]:
-                        if 'by' not in kid or 'text' not in kid:
+                        if kid is not None:
+                            if 'by' not in kid or 'text' not in kid:
+                                passed = False
+                        else:
                             passed = False
                     if passed:
 
